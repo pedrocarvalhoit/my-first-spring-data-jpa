@@ -42,7 +42,7 @@ public class Student {
             nullable = false
     )
     private String emailId;
-    @Embedded //Assim o estudante "Embute" os dados Guardian
+    @Embedded //Now Student has this data
     private Guardian guardian;
 
 }

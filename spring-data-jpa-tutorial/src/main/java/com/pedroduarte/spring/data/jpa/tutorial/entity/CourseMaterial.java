@@ -1,9 +1,6 @@
 package com.pedroduarte.spring.data.jpa.tutorial.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = "course")
 public class CourseMaterial {
     @Id
     @SequenceGenerator(
@@ -23,22 +21,22 @@ public class CourseMaterial {
             strategy = GenerationType.SEQUENCE,
             generator = "course_material_sequence"
     )
-    private Long id;
-
     private Long courseMaterialId;
     private String url;
-    @OneToOne
+    @OneToOne(
+            //Creates the course when i am saving Course Material
+            cascade = CascadeType.ALL,
+           //Will not return this data when call this Class
+            fetch = FetchType.LAZY,
+            //Need to add a course
+            optional = false
+        )
     @JoinColumn(
             name = "course_id",
+            //Established the link between Classes
             referencedColumnName = "courseId"
     )
     private Course course;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
