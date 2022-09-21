@@ -16,7 +16,7 @@ import javax.persistence.*;
         name="tb_student",
         uniqueConstraints = @UniqueConstraint(/**Garantindo que não possa haver email repetidos*/
                 /**Fica registado no Index do MYSQL */
-                name="emailid_unique",
+                name="emailId_unique",
                 columnNames = "email_address"
         )
 )
